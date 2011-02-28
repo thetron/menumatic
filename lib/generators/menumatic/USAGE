@@ -1,0 +1,3 @@
+To create a new MenuMatic navigation in your Rails app, simply do:
+
+    rails generate menumatic:navigation main

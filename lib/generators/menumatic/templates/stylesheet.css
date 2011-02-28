@@ -1,0 +1,26 @@
+ul.navigation{
+  padding: 0;
+  margin: 0;
+  display:block;
+  clear:both:
+  float:left;
+}
+
+ul.navigation li{
+  display: inline;
+  background: #CCC;
+  float: left;
+}
+
+ul.navigation li a{
+  display: block;
+  padding: 15px 5px;
+}
+
+ul.navigation.level_1 li.active{
+  background: #777
+}
+
+ul.navigation.level_2 li{
+  background: #777;
+}
