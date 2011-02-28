@@ -7,7 +7,11 @@ navigation menus.
 
 Start by generating a new navigation
 
-    $ rails g navigation main
+    $ rails g navigation
 
-This will create the file `app/navigation/main.rb` which you can use to
-define the structure of your navigation items
+This will create the file `app/navigation/application_navigation.rb` which you can use to
+define the structure of your navigation items.
+
+# Options
+
+_todo_
