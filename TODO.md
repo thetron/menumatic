@@ -14,3 +14,9 @@ any Menumatic::Navigation::Base, will be converted into a `Group` with
 
 This will allow us to handle the render chain much more logically, and
 hopefully produce some cleaner code.
+
+## Selective Navigation rendering
+
+This should be the next highest priority, and we need to consider how to
+pass the requested groups and chain position through the render process,
+to make sure no link is left behind.
