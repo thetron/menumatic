@@ -26,7 +26,7 @@ module Menumatic
         html_class += " application navigation" if level == 1
         if items && items.count > 0
           list = content_tag(:ul, items.map do |item| 
-            has_active = true if item.is_active?
+            has_active = true if item.is_active?(request)
             content_tag(:li, render_item(item, level))
           end.join("").html_safe, :class => html_class)
         end
@@ -34,11 +34,11 @@ module Menumatic
       end
 
       def render_item(item, level)
-        children = render_list(item.items, level + 1)
+        children = render_list(item.items, level + 1, item.is_active?(request))
         if children
-          item.render(:active => true) + children
+          item.render(request, :active => true) + children
         else
-          item.render
+          item.render(request)
         end
       end
 

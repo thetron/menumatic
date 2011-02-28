@@ -13,11 +13,11 @@ module Menumatic
         self.items = []
       end
 
-      def render(options = {})
+      def render(request, options = {})
         options[:active] ||= false
 
         html_options = self.html_options
-        html_options[:class] = "active" if options[:active] || self.is_active?
+        html_options[:class] = "active" if options[:active] || self.is_active?(request)
 
         if self.is_root
           self.label
@@ -31,8 +31,8 @@ module Menumatic
         yield item if block_given?
       end
 
-      def is_active?
-        false
+      def is_active?(request)
+        request.fullpath == self.destination || request.request_uri == self.destination
       end
 
       private
