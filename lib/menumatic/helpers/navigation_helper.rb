@@ -11,9 +11,10 @@ module Menumatic
         ids = Array(ids)
         navigation_id = ids.first
 
-        # this needs to be made development-only
-        Menumatic::Navigation::Base.destroy_all
-        load "app/navigation/#{navigation_id}_navigation.rb"
+        if Rails.env == "development"
+          Menumatic::Navigation::Base.destroy_all
+          load "app/navigation/#{navigation_id}_navigation.rb"
+        end
 
         navigation = Menumatic::Navigation::Base.get(navigation_id)
         render_list(navigation.items, 1, true)

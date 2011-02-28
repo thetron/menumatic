@@ -14,6 +14,14 @@ module Menumatic
           end
         end
 
+        def group(id)
+          if block_given?
+            group = self.get_instance.root.group(id, &Proc.new)
+          else
+            group = self.get_instance.root.group(id)
+          end
+        end
+
         def get_instance
           id = self.name.split("Navigation").first.underscore.to_sym 
           @@navigations[id] = self.new(id) unless @@navigations.has_key?(id)
@@ -34,7 +42,7 @@ module Menumatic
 
       def initialize(id)
         self.id = id
-        self.root = Menumatic::Navigation::Item.new("Root", "javascript:void(0)", {:root => true})
+        self.root = Menumatic::Navigation::Item::Base.new("Root", "javascript:void(0)", {:root => true})
       end
 
       def items
