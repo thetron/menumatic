@@ -48,7 +48,7 @@ Which will generate a navigation called 'admin'
 
 Inside your navigation file, you can then define the structure of your
 navigation, here is an example taken from the [Menumatic example
-application](http://www.github.com/thetron/menumatic-test):
+application](http://github.com/thetron/menumatic-sample-application):
 
     navigate_to "Home", home_path, :active_paths => [:home_path, :root_path]
     navigate_to "About", about_path do |about|
