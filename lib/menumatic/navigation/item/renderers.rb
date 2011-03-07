@@ -7,7 +7,8 @@ module Menumatic
 
         def render(request, options = {})
           options[:current_level] ||= 0
-          options[:levels] ||= []
+          options[:level] ||= ""
+          options[:levels] ||= [options[:level]].delete_if{ |l| l.blank? }
 
           html_options = {}
           options = options.merge({})

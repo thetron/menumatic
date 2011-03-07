@@ -114,7 +114,7 @@ easily achiveable:
     <!-- snip -->
     <header>
       <nav>
-       <%= navigation :application, :level => [:primary] %>
+       <%= navigation :application, :level => :primary %>
       </nav>
     </header>
 
