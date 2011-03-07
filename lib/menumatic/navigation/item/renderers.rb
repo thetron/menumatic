@@ -7,8 +7,6 @@ module Menumatic
 
         def render(request, options = {})
           options[:current_level] ||= 0
-          options[:level] ||= ""
-          options[:levels] ||= [options[:level]].delete_if{ |l| l.blank? }
 
           html_options = {}
           options = options.merge({})
@@ -50,10 +48,6 @@ module Menumatic
 
         def is_active?(request)
           has_active_descendant?(request) || paths_match?(request)
-        end
-
-        def contains_active_class?(html)
-          html =~ /class=['|"](\w*\s+)?active/
         end
 
         def has_active_descendant?(request)
