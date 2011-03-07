@@ -25,7 +25,7 @@ module Menumatic
             item.render(request, child_options)
           end.join("")
           html_options[:class] ||= ""
-          html_options[:class] = (html_options[:class].split(" ") + self.is_active?(request) ? "active" : "inactive").join(" ")
+          html_options[:class] = (html_options[:class].split(" ") + (self.is_active?(request) ? ["active"] : ["inactive"])).join(" ")
 
           unless list.blank?
             list_options = html_options.merge({})
