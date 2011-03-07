@@ -51,11 +51,11 @@ navigation, here is an example taken from the [Menumatic example
 application](http://www.github.com/thetron/menumatic-test):
 
     navigate_to "Home", home_path, :active_paths => [:home_path, :root_path]
-      navigate_to "About", about_path do |about|
-        about.navigate_to "History", about_history_path
-        about.navigate_to "The team", about_the_team_path 
-        about.navigate_to "Our vision", about_our_vision_path
-      end
+    navigate_to "About", about_path do |about|
+      about.navigate_to "History", about_history_path
+      about.navigate_to "The team", about_the_team_path 
+      about.navigate_to "Our vision", about_our_vision_path
+    end
     navigate_to "Store", store_on_special_path do |store|
       store.navigate_to "On special", store_on_special_path
       store.navigate_to "Coming soon", store_coming_soon_path
