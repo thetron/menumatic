@@ -9,16 +9,23 @@ module Menumatic
           options[:current_level] ||= 0
 
           html_options = {}
+          html_options[:class] = options[:class]
+          options.delete(:class)
           options = options.merge({})
           options[:current_level] += 1
 
+          options[:show] ||= :active
           options[:wrapper_tag] ||= :ul
           options[:item_tag] ||= :li
 
           # render list
-          list = self.items.map{ |item| item.render(request, options) }.join("")
+          list = self.items.map do |item|
+            child_options = options.merge({})
+            child_options[:show] = :all if item.is_group? && options[:group] && options[:group]
+            item.render(request, child_options)
+          end.join("")
           html_options[:class] ||= ""
-          html_options[:class] += self.is_active?(request) ? "active" : "inactive"
+          html_options[:class] = (html_options[:class].split(" ") + self.is_active?(request) ? "active" : "inactive").join(" ")
 
           unless list.blank?
             list_options = html_options.merge({})
@@ -34,12 +41,12 @@ module Menumatic
           link = ""
           if self.is_group? && options[:group] && options[:group] == self.id
             link = content_tag(options[:item_tag], self.id.to_s, html_options)
-          elsif self.is_link?
+          elsif self.is_link? && !options[:group]
             link = content_tag(options[:item_tag], link_to(self.label, self.destination), html_options)
           end
 
           if on_valid_level?(options[:levels], options[:current_level])
-            if self.is_active?(request) || options[:current_level] == 1
+            if options[:show] == :all || self.is_active?(request) || options[:current_level] == 1
               (link + list).html_safe
             else
               link.html_safe

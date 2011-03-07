@@ -125,3 +125,7 @@ The best example of when this is useful is for developing a sidebar. Particularl
 
 __Please note__: grouping is not currently available, but is coming
 _very_ soon.
+
+## Credits
+
+I'd like to thank [Jordan Lewis](http://github.com/jordan-lewis) for his CSS styling skills.
