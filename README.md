@@ -50,29 +50,32 @@ Inside your navigation file, you can then define the structure of your
 navigation, here is an example taken from the [Menumatic example
 application](http://www.github.com/thetron/menumatic-test):
 
-  navigate_to "Home", home_path, :active_paths => [:home_path, :root_path]
-    navigate_to "About", about_path do |about|
-      about.navigate_to "History", about_history_path
-      about.navigate_to "The team", about_the_team_path 
-      about.navigate_to "Our vision", about_our_vision_path
-      group :sidebar do |sidebar|
-        sidebar.navigate_to "Edit 'About'", "javascript:void(0)"
+    navigate_to "Home", home_path, :active_paths => [:home_path, :root_path]
+      navigate_to "About", about_path do |about|
+        about.navigate_to "History", about_history_path
+        about.navigate_to "The team", about_the_team_path 
+        about.navigate_to "Our vision", about_our_vision_path
+      end
+    navigate_to "Store", store_on_special_path do |store|
+      store.navigate_to "On special", store_on_special_path
+      store.navigate_to "Coming soon", store_coming_soon_path
+      store.navigate_to "Categories", store_categories_path do |categories|
+        categories.navigate_to "Shirts", store_categories_shirts_path
+        categories.navigate_to "Pants", store_categories_pants_path
+        categories.navigate_to "Hats", store_categories_hats_path
+        categories.navigate_to "Accessories", store_categories_accessories_path
+        categories.navigate_to "Sporks", store_categories_sporks_path
       end
     end
-  navigate_to "Store", store_on_special_path do |store|
-    store.navigate_to "On special", store_on_special_path
-    store.navigate_to "Coming soon", store_coming_soon_path
-    store.navigate_to "Categories", store_categories_path do |categories|
-      categories.navigate_to "Shirts", store_categories_shirts_path
-      categories.navigate_to "Pants", store_categories_pants_path
-      categories.navigate_to "Hats", store_categories_hats_path
-      categories.navigate_to "Accessories", store_categories_accessories_path
-      categories.navigate_to "Sporks", store_categories_sporks_path
-    end
-  end
-  navigate_to "Something", something_else_path
-  navigate_to "Contact us", contact_us_path
+    navigate_to "Something", something_else_path
+    navigate_to "Contact us", contact_us_path
 
+When creating your navigation you effectively have two methods at your
+disposal: `navigate_to` and `group`
+
+`navigate_to` creates a navigation item in your menu, and works very
+similar to Rails' built-in `link_to` helper. It also accepts a few other
+options, which are listed below.
 
 To display your navigation in your view, simply use the menumatic
 helper:
@@ -128,6 +131,7 @@ Menumatic also supports grouping navigation items together. By default,
 groups nested in your navigation will not display as part of the normal
 rendering, but only when you request them.
 
-The best example of when this is useful is for developing a sidebar. Particularly in the case of a sidebar whose navigation items will vary, depending on the page. For example:
+The best example of when this is useful is for developing a sidebar. Particularly in the case of a sidebar whose navigation items will vary, depending on the page.
 
-_todo_
+__Please note__: grouping is not currently available, but is coming
+_very_ soon.
