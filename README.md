@@ -95,7 +95,7 @@ helper:
 Which will give you a full-semantic, auto-highlighted navigation.
 
 
-## Selective Rendering
+## Rendering specific navigation levels
 
 By default, Menumatic displays your navigation as a set of nested
 unordered lists. However, if you need to break up your layout, this is
@@ -116,18 +116,6 @@ easily achiveable:
 
 The above example would render the top-level navigation in the
 `<header>` and everything else in the `sub_navigation` div below.
-
-
-## Grouping
-
-Menumatic also supports grouping navigation items together. By default,
-groups nested in your navigation will not display as part of the normal
-rendering, but only when you request them.
-
-The best example of when this is useful is for developing a sidebar. Particularly in the case of a sidebar whose navigation items will vary, depending on the page.
-
-__Please note__: grouping is not currently available, but is coming
-_very_ soon.
 
 ## Credits
 

@@ -19,11 +19,7 @@ module Menumatic
           options[:item_tag] ||= :li
 
           # render list
-          list = self.items.map do |item|
-            child_options = options.merge({})
-            child_options[:show] = :all if item.is_group? && options[:group] && options[:group]
-            item.render(request, child_options)
-          end.join("")
+          list = self.items.map { |item| item.render(request, options) }.join("")
           html_options[:class] ||= ""
           html_options[:class] = (html_options[:class].split(" ") + (self.is_active?(request) ? ["active"] : ["inactive"])).join(" ")
 
@@ -40,13 +36,13 @@ module Menumatic
           # render link
           link = ""
           if self.is_group? && options[:group] && options[:group] == self.id
-            link = content_tag(options[:item_tag], self.id.to_s, html_options)
+            link = content_tag(options[:item_tag], self.id.to_s.titleize, html_options)
           elsif self.is_link? && !options[:group]
             link = content_tag(options[:item_tag], link_to(self.label, self.destination), html_options)
           end
 
           if on_valid_level?(options[:levels], options[:current_level])
-            if options[:show] == :all || self.is_active?(request) || options[:current_level] == 1
+            if options[:show] == :all || self.is_active?(request) || options[:current_level] == 1 || (self.is_group? && options[:group] == self.group_id)
               (link + list).html_safe
             else
               link.html_safe
