@@ -3,6 +3,17 @@
 Menumatic is a _Rails 3 exclusive_ gem which aids in developing HTML
 navigation menus.
 
+## Philosophy
+
+Menumatic takes a slightly different approach to other navigation gems,
+in that the structure of the menu is considered to be more 'M' than 'V'
+in the MVC world. This is because given any view, we may only want to
+display _parts_ of a particular navigation, such as sub-navigations and
+sidebars, for which there is a simple view helper.
+
+This results in simple, clean and easy-to-read code that you can
+leverage in any part of your Rails app.
+
 # Getting Started
 
 Include the gem in your `Gemfile` like so:
@@ -25,19 +36,6 @@ layout:
 
     <%= stylesheet_link_tag "application_navigation" %>
 
-
-# Philosophy
-
-Menumatic takes a slightly different approach to other navigation gems,
-in that the structure of the menu is considered to be more 'M' than 'V'
-in the MVC world. This is because given any view, we may only want to
-display _parts_ of a particular navigation, such as sub-navigations and
-sidebars, for which there is a simple view helper.
-
-This results in simple, clean and easy-to-read code that you can
-leverage in any part of your Rails app.
-
-
 # Using Menumatic
 
 Navigations are stored in `app/navigation`. The default navigation is
@@ -52,7 +50,29 @@ Inside your navigation file, you can then define the structure of your
 navigation, here is an example taken from the [Menumatic example
 application](http://www.github.com/thetron/menumatic-test):
 
-_todo_
+  navigate_to "Home", home_path, :active_paths => [:home_path, :root_path]
+    navigate_to "About", about_path do |about|
+      about.navigate_to "History", about_history_path
+      about.navigate_to "The team", about_the_team_path 
+      about.navigate_to "Our vision", about_our_vision_path
+      group :sidebar do |sidebar|
+        sidebar.navigate_to "Edit 'About'", "javascript:void(0)"
+      end
+    end
+  navigate_to "Store", store_on_special_path do |store|
+    store.navigate_to "On special", store_on_special_path
+    store.navigate_to "Coming soon", store_coming_soon_path
+    store.navigate_to "Categories", store_categories_path do |categories|
+      categories.navigate_to "Shirts", store_categories_shirts_path
+      categories.navigate_to "Pants", store_categories_pants_path
+      categories.navigate_to "Hats", store_categories_hats_path
+      categories.navigate_to "Accessories", store_categories_accessories_path
+      categories.navigate_to "Sporks", store_categories_sporks_path
+    end
+  end
+  navigate_to "Something", something_else_path
+  navigate_to "Contact us", contact_us_path
+
 
 To display your navigation in your view, simply use the menumatic
 helper:
@@ -72,7 +92,12 @@ Which will give you a full-semantic, auto-highlighted navigation.
 
 ## Options for `navigate_to`
 
-_todo_
+### active_paths
+
+`active_paths` allows you to specify an array of valid paths (as
+strings, or regular expressions) for which that navigation item will be
+considered active.
+
 
 ## Selective Rendering
 
@@ -85,12 +110,12 @@ easily achiveable:
     <!-- snip -->
     <header>
       <nav>
-       <%= navigation :application, :level => :primary %>
+       <%= navigation :application, :level => [:primary] %>
       </nav>
     </header>
 
     <div class="sub_navigation">
-      <%= navigation :application, :start_level => :secondary %>
+      <%= navigation :application, :levels => [:secondary, :tertiary] %>
     </div>
 
 The above example would render the top-level navigation in the
