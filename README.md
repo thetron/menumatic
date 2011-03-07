@@ -51,11 +51,13 @@ navigation, here is an example taken from the [Menumatic example
 application](http://github.com/thetron/menumatic-sample-application):
 
     navigate_to "Home", home_path, :active_on => [:home_path, :root_path]
+
     navigate_to "About", about_path do |about|
       about.navigate_to "History", about_history_path
       about.navigate_to "The team", about_the_team_path 
       about.navigate_to "Our vision", about_our_vision_path
     end
+
     navigate_to "Store", store_on_special_path do |store|
       store.navigate_to "On special", store_on_special_path
       store.navigate_to "Coming soon", store_coming_soon_path
@@ -67,6 +69,7 @@ application](http://github.com/thetron/menumatic-sample-application):
         categories.navigate_to "Sporks", store_categories_sporks_path
       end
     end
+
     navigate_to "Something", something_else_path
     navigate_to "Contact us", contact_us_path
     navigate_to "Admin", admin_path if current_user.is_admin?
