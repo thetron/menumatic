@@ -17,7 +17,8 @@ module Menumatic
         end
 
         navigation = Menumatic::Navigation::Base.get(navigation_id)
-        render_list(navigation.items, 1, true)
+        #render_list(navigation.items, 1, true)
+        navigation.root.render(request, options)
       end
 
       private

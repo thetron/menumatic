@@ -5,12 +5,11 @@ module Menumatic
   end
 
   module Navigation
-    module Group
-      autoload :Base, 'menumatic/navigation/group'
-    end
     module Item
       autoload :Renderers, 'menumatic/navigation/item/renderers'
       autoload :Navigators, 'menumatic/navigation/item/navigators'
+      autoload :Group, 'menumatic/navigation/item/group'
+      autoload :Link, 'menumatic/navigation/item/link'
       autoload :Base, 'menumatic/navigation/item'
     end
     autoload :Base, 'menumatic/navigation'

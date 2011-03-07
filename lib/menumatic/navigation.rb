@@ -6,11 +6,11 @@ module Menumatic
       attr_accessor :id, :root
 
       class << self
-        def navigate_to(label, destination, options = {}, html_options = {})
+        def navigate_to(label, destination, options = {})
           if block_given?
-            item = self.get_instance.root.navigate_to(label, destination, options, html_options, &Proc.new)
+            item = self.get_instance.root.navigate_to(label, destination, options, &Proc.new)
           else
-            item = self.get_instance.root.navigate_to(label, destination, options, html_options)
+            item = self.get_instance.root.navigate_to(label, destination, options)
           end
         end
 
@@ -42,7 +42,7 @@ module Menumatic
 
       def initialize(id)
         self.id = id
-        self.root = Menumatic::Navigation::Item::Base.new("Root", "javascript:void(0)", {:root => true})
+        self.root = Menumatic::Navigation::Item::Group.new("#{id}_root".to_sym)
       end
 
       def items
