@@ -14,4 +14,6 @@ module Menumatic
     end
     autoload :Base, 'menumatic/navigation'
   end
+
+  autoload :Routes, 'menumatic/rails/routes'
 end

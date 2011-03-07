@@ -35,17 +35,15 @@ module Menumatic
 
           # render link
           link = ""
-          if self.is_group? && options[:group] && options[:group] == self.id
-            link = content_tag(options[:item_tag], self.id.to_s.titleize, html_options)
-          elsif self.is_link? && !options[:group]
-            link = content_tag(options[:item_tag], link_to(self.label, self.destination), html_options)
-          end
+          link = link_to(self.label, self.destination).html_safe if self.is_link? && !options[:group]
 
           if on_valid_level?(options[:levels], options[:current_level])
-            if options[:show] == :all || self.is_active?(request) || options[:current_level] == 1 || (self.is_group? && options[:group] == self.group_id)
-              (link + list).html_safe
+            if options[:current_level] == 1 || (self.is_group? && options[:group] == self.group_id)
+              list.html_safe
+            elsif options[:show] == :all || self.is_active?(request)
+              content_tag(options[:item_tag], link.to_s + list.to_s, html_options).to_s.html_safe
             else
-              link.html_safe
+              content_tag(options[:item_tag], link, html_options).to_s.html_safe
             end
           elsif self.is_active?(request)
             list.html_safe

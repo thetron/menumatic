@@ -1,0 +1,9 @@
+module ActionDispatch::Routing
+  class Mapper
+    def sitemap_for(navigation)
+
+      
+
+    end
+  end
+end
