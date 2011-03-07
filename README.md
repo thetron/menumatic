@@ -69,6 +69,7 @@ application](http://www.github.com/thetron/menumatic-test):
     end
     navigate_to "Something", something_else_path
     navigate_to "Contact us", contact_us_path
+    navigate_to "Admin", admin_path if current_user.is_admin?
 
 When creating your navigation you effectively have two methods at your
 disposal: `navigate_to` and `group`
