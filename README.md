@@ -92,17 +92,6 @@ helper:
 Which will give you a full-semantic, auto-highlighted navigation.
 
 
-# More Options
-
-## Options for `navigate_to`
-
-### active_paths
-
-`active_paths` allows you to specify an array of valid paths (as
-strings, or regular expressions) for which that navigation item will be
-considered active.
-
-
 ## Selective Rendering
 
 By default, Menumatic displays your navigation as a set of nested

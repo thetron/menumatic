@@ -8,6 +8,8 @@ module Menumatic
         options[:group] ||= nil
         options[:groups] ||= [options[:groups]].delete_if{ |g| g.blank? }
 
+        # Reload the navigation. Inefficient, but allows for the use of
+        # normal if/unless in navigation structure, instead of Procs.
         Menumatic::Navigation::Base.destroy_all
         load "app/navigation/#{navigation_id}_navigation.rb"
 

@@ -12,6 +12,9 @@ module Menumatic
           options = options.merge({})
           options[:current_level] += 1
 
+          options[:wrapper_tag] ||= :ul
+          options[:item_tag] ||= :li
+
           # render list
           list = self.items.map{ |item| item.render(request, options) }.join("")
           html_options[:class] ||= ""
@@ -21,7 +24,7 @@ module Menumatic
             list_options = html_options.merge({})
             list_options[:class] += " level_#{options[:current_level]}"
             if on_valid_level?(options[:levels], options[:current_level]) || options[:current_level] == 1
-              list = content_tag(:ul, list.html_safe, list_options)
+              list = content_tag(options[:wrapper_tag], list.html_safe, list_options)
             else
               list = list.html_safe
             end
@@ -30,9 +33,9 @@ module Menumatic
           # render link
           link = ""
           if self.is_group? && options[:group] && options[:group] == self.id
-            link = content_tag(:li, self.id.to_s, html_options)
+            link = content_tag(options[:item_tag], self.id.to_s, html_options)
           elsif self.is_link?
-            link = content_tag(:li, link_to(self.label, self.destination), html_options)
+            link = content_tag(options[:item_tag], link_to(self.label, self.destination), html_options)
           end
 
           if on_valid_level?(options[:levels], options[:current_level])
