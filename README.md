@@ -50,7 +50,7 @@ Inside your navigation file, you can then define the structure of your
 navigation, here is an example taken from the [Menumatic example
 application](http://github.com/thetron/menumatic-sample-application):
 
-    navigate_to "Home", home_path, :active_paths => [:home_path, :root_path]
+    navigate_to "Home", home_path, :active_on => [:home_path, :root_path]
     navigate_to "About", about_path do |about|
       about.navigate_to "History", about_history_path
       about.navigate_to "The team", about_the_team_path 
