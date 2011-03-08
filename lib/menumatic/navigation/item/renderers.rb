@@ -52,14 +52,20 @@ module Menumatic
           end
         end
 
-        def render_sitemap(document, options = {})
+        def render_sitemap(document, request, options = {})
           if is_link?
-            document.url do
-              document.loc self.destination
-              document.changefreq "weekly"
+            unless self.destination[0...10] == "javascript"
+              document.url do
+                if self.destination[0...4] == "http"
+                  document.loc self.destination
+                else
+                  document.loc request.protocol + request.host_with_port + self.destination
+                end
+                document.changefreq "weekly"
+              end
             end
           end
-          self.items.each{ |item| item.render_sitemap(document, options) }
+          self.items.each{ |item| item.render_sitemap(document, request, options) }
         end
 
         def is_active?(request)

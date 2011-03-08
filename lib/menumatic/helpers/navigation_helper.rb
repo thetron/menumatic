@@ -17,7 +17,7 @@ module Menumatic
 
       def sitemap(document, navigation_id = "application", options = {})
         navigation = load_navigation(navigation_id)
-        navigation.root.render_sitemap(document, options)
+        navigation.root.render_sitemap(document, request, options)
       end
 
       def load_navigation(navigation_id)
