@@ -117,6 +117,14 @@ easily achiveable:
 The above example would render the top-level navigation in the
 `<header>` and everything else in the `sub_navigation` div below.
 
+
+## Sitemap generation
+
+Menumatic can also optionally generate a sitemap.xml. To include a
+sitemap in your site, simply add this line to your `config/routes.rb`
+
+    sitemap_for :application # or the name of your navigation
+
 ## Credits
 
 I'd like to thank [Jordan Lewis](http://github.com/jordan-lewis) for his CSS styling skills.
