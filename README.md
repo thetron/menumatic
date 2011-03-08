@@ -3,16 +3,18 @@
 Menumatic is a _Rails 3 exclusive_ gem which aids in developing HTML
 navigation menus.
 
+
 ## Philosophy
 
-Menumatic takes a slightly different approach to other navigation gems,
-in that the structure of the menu is considered to be more 'M' than 'V'
-in the MVC world. This is because given any view, we may only want to
-display _parts_ of a particular navigation, such as sub-navigations and
-sidebars, for which there is a simple view helper.
+When designing Menumatic, I wanted a way in which I could remove
+navigation logic from the view all together, but also keep configuration
+to a bare minimum and (hopefully) sticking to the principle of
+'convention-over-configuration'.
 
-This results in simple, clean and easy-to-read code that you can
-leverage in any part of your Rails app.
+Menumatic considers navigations to be more like models as opposed to
+views. As such, navigations are defined in the `app/navigation`
+directory, and rendered in the view with a simple helper method.
+
 
 # Getting Started
 
@@ -31,10 +33,11 @@ You can then get started by generating a new navigation:
 This will create the file `app/navigation/application_navigation.rb` which you can use to
 define the structure of your navigation items.
 
-If you want to use the bundled stylesheet (bland, but functional), add the following to your
+If you want to use the bundled stylesheet (nothing fancy, but quite serviceable - enough to get you up and running), add the following to your
 layout:
 
     <%= stylesheet_link_tag "application_navigation" %>
+
 
 # Using Menumatic
 
@@ -51,13 +54,7 @@ navigation, here is an example taken from the [Menumatic example
 application](http://github.com/thetron/menumatic-sample-application):
 
     navigate_to "Home", home_path, :active_on => [:home_path, :root_path]
-
-    navigate_to "About", about_path do |about|
-      about.navigate_to "History", about_history_path
-      about.navigate_to "The team", about_the_team_path 
-      about.navigate_to "Our vision", about_our_vision_path
-    end
-
+    navigate_to "About", about_path
     navigate_to "Store", store_on_special_path do |store|
       store.navigate_to "On special", store_on_special_path
       store.navigate_to "Coming soon", store_coming_soon_path
@@ -69,8 +66,6 @@ application](http://github.com/thetron/menumatic-sample-application):
         categories.navigate_to "Sporks", store_categories_sporks_path
       end
     end
-
-    navigate_to "Something", something_else_path
     navigate_to "Contact us", contact_us_path
     navigate_to "Admin", admin_path if current_user.is_admin?
 
@@ -125,6 +120,24 @@ sitemap in your site, simply add this line to your `config/routes.rb`
 
     sitemap_for :application # or the name of your navigation
 
-## Credits
+
+# Todo
+
+I have some big ideas for Menumatic, but there should be enough
+functionality in there to service the majority of web apps. If you have
+any feature requests, feel free to [open an issue](http://github.com/thetron/menumatic/issues) - I'd love to get
+some feedback!
+
+This is what I have planned for some future releases:
+
+* __Tests__ I know I should've been doing this properly from the start,
+  but i'm still trying to get my head around TDD. This is definitely a
+  big priority for Menumatic however.
+
+* __More configuration options__ Ideally, I want the ability to
+  configure just about every aspect of Menumatic.
+
+
+# Credits
 
 I'd like to thank [Jordan Lewis](http://github.com/jordan-lewis) for his CSS styling skills.
