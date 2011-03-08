@@ -11,8 +11,7 @@ module Menumatic
         options[:class] ||= ""
         options[:class] += "navigation #{navigation_id}"
 
-        # Reload the navigation. Inefficient, but allows for the use of
-        # normal if/unless in navigation structure, instead of Procs.
+        # Eager load the requested navgation (allows for use of normal if/unless statements)
         Menumatic::Navigation::Base.destroy_all
         load "app/navigation/#{navigation_id}_navigation.rb"
 
