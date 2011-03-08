@@ -1,26 +1,73 @@
-ul.navigation{
-  padding: 0;
-  margin: 0;
-  display:block;
-  clear:both:
-  float:left;
+		ul.navigation.<%= file_name %>, ul.navigation.<%= file_name %> ul { 
+			font-family:Tahoma,Arial,sans-serif; font-size:12px; margin:0px; padding:0px;
+			width: 100%; 
+			background: #ccc; 
+			display:block; 
+			position:absolute; 
+			top:30px; 
+			left: 0; 
+			list-style:none;
+			padding:0;
+			margin: 0;
+		}
+		
+			ul.navigation.<%= file_name %>.level_1 > li > a{
+				padding: 8px 10px;
+			}
+		
+			ul.navigation.<%= file_name %> li { 
+				margin:0; 
+				padding:0 10px; 
+				list-style:none; 
+				float:left; 
+				height: 30px; 
+			}
+			ul.navigation.<%= file_name %> li:hover,
+			ul.navigation.<%= file_name %> li.active { color:#FFF; text-decoration:none; }
+				ul.navigation.<%= file_name %> li a { 
+					padding:0 10px; 
+					margin:0; 
+					color:#FFF; 
+					text-decoration: none; 
+					display: block; 
+				}
+
+			
+/* Level 1 */
+ul.navigation.<%= file_name %>.level_1 { position: relative; top: 0; }
+ul.navigation.<%= file_name %>.level_1 > li.active,
+ul.navigation.<%= file_name %>.level_1 > li.active:hover { background:#444; }
+ul.navigation.<%= file_name %>.level_1 > li:hover { background:#689cfe; }
+
+/* Levels 2+ */
+ul.navigation.<%= file_name %>.level_1 { background: #3b7df6; }
+ul.navigation.<%= file_name %> ul.level_2 { background: #444; }
+ul.navigation.<%= file_name %> ul.level_3 { background: #666; }
+ul.navigation.<%= file_name %> ul.level_4 { background: #828282; }
+
+ul.navigation.<%= file_name %> ul li a { 
+	height: 20px;
+	margin-top: 5px;
+	line-height: 20px;
+}
+ul.navigation.<%= file_name %> ul li a:hover,
+ul.navigation.<%= file_name %> ul li.active > a { 
+	background:#b3b3b3; 
+	color:#FFF; 
+	text-decoration:none; 
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
-ul.navigation li{
-  display: inline;
-  background: #CCC;
-  float: left;
-}
+ul.navigation.<%= file_name %>.depth_1  { height: 30px; }
+ul.navigation.<%= file_name %>.depth_2  { height: 60px; }
+ul.navigation.<%= file_name %>.depth_3  { height: 90px; }
+ul.navigation.<%= file_name %>.depth_4  { height: 120px; }
+ul.navigation.<%= file_name %>.depth_5  { height: 150px; }
+ul.navigation.<%= file_name %>.depth_6  { height: 180px; }
+ul.navigation.<%= file_name %>.depth_7  { height: 210px; }
+ul.navigation.<%= file_name %>.depth_8  { height: 240px; }
+ul.navigation.<%= file_name %>.depth_9  { height: 270px; }
+ul.navigation.<%= file_name %>.depth_10 { height: 300px; }
 
-ul.navigation li a{
-  display: block;
-  padding: 15px 5px;
-}
-
-ul.navigation.level_1 li.active{
-  background: #777
-}
-
-ul.navigation.level_2 li{
-  background: #777;
-}

@@ -11,7 +11,7 @@ module Menumatic
       end
 
       def generate_stylesheet
-        copy_file "stylesheet.css", "public/stylesheets/#{file_name}_navigation.css" unless options.skip_stylesheet?
+        template "stylesheet.css", "public/stylesheets/#{file_name}_navigation.css" unless options.skip_stylesheet?
       end
 
       private
