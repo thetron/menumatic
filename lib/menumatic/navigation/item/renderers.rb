@@ -34,7 +34,6 @@ module Menumatic
             end
           end
 
-
           # render link
           link = ""
           link = link_to(self.label, self.destination).html_safe if self.is_link? && !options[:group]
