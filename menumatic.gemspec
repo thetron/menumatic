@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Nicholas Bruning"]
   s.email       = ["nicholas@bruning.com.au"]
-  s.homepage    = ""
+  s.homepage    = "http://github.com/thetron/menumatic"
   s.summary     = %q{Menumatic is a Rails 3 gem which aims to simplify building complex website navigation}
   s.description = %q{Menumatic is a Rails 3 exclusive gem which aims to take all the fuss and clutter out of developing semantic, usable navigation menus.}
 
