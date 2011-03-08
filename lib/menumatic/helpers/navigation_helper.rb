@@ -11,12 +11,20 @@ module Menumatic
         options[:class] ||= ""
         options[:class] += "navigation #{navigation_id}"
 
+        navigation = load_navigation(navigation_id)
+        navigation.root.render(request, options)
+      end
+
+      def sitemap(document, navigation_id = "application", options = {})
+        navigation = load_navigation(navigation_id)
+        navigation.root.render_sitemap(document, options)
+      end
+
+      def load_navigation(navigation_id)
         # Eager load the requested navgation (allows for use of normal if/unless statements)
         Menumatic::Navigation::Base.destroy_all
         load "app/navigation/#{navigation_id}_navigation.rb"
-
-        navigation = Menumatic::Navigation::Base.get(navigation_id)
-        navigation.root.render(request, options)
+        Menumatic::Navigation::Base.get(navigation_id)
       end
 
       def navigation_group(navigation_id, group_id, options = {})

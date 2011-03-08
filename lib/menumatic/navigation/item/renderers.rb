@@ -7,7 +7,6 @@ module Menumatic
 
         def render(request, options = {})
           options[:current_level] ||= 0
-          options[:depth] ||= 0
 
           html_options = {}
           html_options[:class] = options[:class]
@@ -19,11 +18,6 @@ module Menumatic
           options[:wrapper_tag] ||= :ul
           options[:item_tag] ||= :li
 
-          # calculate depth
-          if self.is_active?(request)
-            options[:depth] += 1
-          end
-
           # render list
           list = self.items.map { |item| item.render(request, options) }.join("")
           html_options[:class] ||= ""
@@ -32,7 +26,7 @@ module Menumatic
           unless list.blank?
             list_options = html_options.merge({})
             list_options[:class] += " level_#{options[:current_level]}"
-            list_options[:class] += " depth_#{options[:depth]}" if options[:current_level] == 1
+            list_options[:class] += " depth_#{count_active_descendants(request)}" if options[:current_level] == 1
             if on_valid_level?(options[:levels], options[:current_level]) || options[:current_level] == 1
               list = content_tag(options[:wrapper_tag], list.html_safe, list_options)
             else
@@ -58,6 +52,16 @@ module Menumatic
           end
         end
 
+        def render_sitemap(document, options = {})
+          if is_link?
+            document.url do
+              document.loc self.destination
+              document.changefreq "weekly"
+            end
+          end
+          self.items.each{ |item| item.render_sitemap(document, options) }
+        end
+
         def is_active?(request)
           has_active_descendant?(request) || paths_match?(request)
         end
@@ -67,6 +71,16 @@ module Menumatic
             return true if item.has_active_descendant?(request)
           end
           return true if paths_match?(request)
+        end
+
+        def count_active_descendants(request)
+          self.items.each do |item|
+            return item.count_active_descendants(request) + 1 if item.has_active_descendant?(request)
+          end
+          if self.is_group? && !self.has_active_descendant?(request)
+            return 1
+          end
+          0
         end
 
         def paths_match?(request)
