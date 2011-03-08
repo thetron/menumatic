@@ -8,7 +8,7 @@ navigation menus.
 
 When designing Menumatic, I wanted a way in which I could remove
 navigation logic from the view all together, but also keep configuration
-to a bare minimum and (hopefully) sticking to the principle of
+to a bare minimum and (hopefully) stick to the principle of
 'convention-over-configuration'.
 
 Menumatic considers navigations to be more like models as opposed to
