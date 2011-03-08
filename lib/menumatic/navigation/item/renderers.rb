@@ -44,7 +44,7 @@ module Menumatic
               list.html_safe
             elsif options[:show] == :all || self.is_active?(request)
               content_tag(options[:item_tag], link.to_s + list.to_s, html_options).to_s.html_safe
-            else
+            elsif self.is_link?
               content_tag(options[:item_tag], link, html_options).to_s.html_safe
             end
           elsif self.is_active?(request)
