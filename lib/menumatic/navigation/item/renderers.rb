@@ -66,19 +66,23 @@ module Menumatic
           has_active_descendant?(request) || paths_match?(request)
         end
 
-        def has_active_descendant?(request)
+        def has_active_descendant?(request, include_self = true)
           self.items.each do |item|
             return true if item.has_active_descendant?(request)
           end
-          return true if paths_match?(request)
+          return true if paths_match?(request) if include_self
+          false
         end
 
         def count_active_descendants(request)
           self.items.each do |item|
             return item.count_active_descendants(request) + 1 if item.has_active_descendant?(request)
           end
-          if self.is_group? && !self.has_active_descendant?(request)
+
+          if (self.paths_match?(request) && !self.has_active_descendant?(request, false) && self.items.count > 0)
             return 1
+          elsif (self.is_group? && !self.has_active_descendant?(request)) || (self.paths_match?(request) && !self.has_active_descendant?(request, false))
+            return 0
           end
           0
         end
