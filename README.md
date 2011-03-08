@@ -45,9 +45,10 @@ Navigations are stored in `app/navigation`. The default navigation is
 given a name of 'application', however you can specify the name in the
 generator:
 
-    $ rails g navigation admin
+    $ rails g navigation application
 
-Which will generate a navigation called 'admin'
+Which will generate a navigation called
+`app/navigation/application_navigation.rb` and the basic stylesheet.
 
 Inside your navigation file, you can then define the structure of your
 navigation, here is an example taken from the [Menumatic example
@@ -116,6 +117,7 @@ The above example would render the top-level navigation in the
 ## Sitemap generation
 
 Menumatic can also optionally generate a sitemap.xml. To include a
+
 sitemap in your site, simply add this line to your `config/routes.rb`
 
     sitemap_for :application # or the name of your navigation
@@ -124,18 +126,17 @@ sitemap in your site, simply add this line to your `config/routes.rb`
 # Todo
 
 I have some big ideas for Menumatic, but there should be enough
-functionality in there to service the majority of web apps. If you have
-any feature requests, feel free to [open an issue](http://github.com/thetron/menumatic/issues) - I'd love to get
+functionality in there to service the vast majority of web apps. If you have
+any feature requests or questions, feel free to [open an issue](http://github.com/thetron/menumatic/issues) - I'd love to get
 some feedback!
 
 This is what I have planned for some future releases:
 
 * __Tests__ I know I should've been doing this properly from the start,
-  but i'm still trying to get my head around TDD. This is definitely a
-  big priority for Menumatic however.
+  but i'm still trying to get my head around TDD. However, this is definitely a
+  big priority for Menumatic.
 
-* __More configuration options__ Ideally, I want the ability to
-  configure just about every aspect of Menumatic.
+* __More configuration options__
 
 
 # Credits
