@@ -1,7 +1,6 @@
 module Menumatic
   module Helpers
     module NavigationHelper
-
       def menumatic(navigation_id = :application, options = {})
         options[:level] ||= nil # single level to render, overrides any other level settings
         options[:levels] ||= [options[:level]].delete_if{ |l| l.blank? }
@@ -20,13 +19,6 @@ module Menumatic
         navigation = load_navigation(navigation_id)
         navigation.root.render_sitemap(document, request, options)
       end
-
-      # refactor this into a class method on Menumatic::Navigation::Base
-
-      #def navigation_group(navigation_id, group_id, options = {})
-      #  options = options.merge({:group => group_id})
-      #  navigation(navigation_id, options)
-      #end
     end
   end
 end
