@@ -3,6 +3,7 @@
 Menumatic is a _Rails 3 exclusive_ gem which aids in developing HTML
 navigation menus.
 
+__Please note__ menumatic is still in alpha however all the features mentioned in the readme should be working as expected - at the moment we're focussed on improving test coverage to bring us up to a proper, full release.
 
 ## Philosophy
 
