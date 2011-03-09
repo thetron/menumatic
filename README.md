@@ -46,7 +46,7 @@ Navigations are stored in `app/navigation`. The default navigation is
 given a name of 'application', however you can specify the name in the
 generator:
 
-    $ rails g navigation application
+    $ rails g menumatic:navigation application
 
 Which will generate a navigation called
 `app/navigation/application_navigation.rb` and the basic stylesheet.
