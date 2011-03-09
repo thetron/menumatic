@@ -13,7 +13,7 @@ module Menumatic
           options.delete(:class)
           options = options.merge({})
           options[:current_level] += 1
-          
+
           options[:show] ||= :active
           options[:wrapper_tag] ||= :ul
           options[:item_tag] ||= :li
@@ -26,7 +26,7 @@ module Menumatic
           unless list.blank?
             list_options = html_options.merge({})
             list_options[:class] += " level_#{options[:current_level]}"
-            list_options[:class] += " depth_#{count_active_descendants(request)}" if options[:current_level] == 1
+            list_options[:class] += " depth_#{depth_count(request, options)}" if options[:current_level] == 1
             if on_valid_level?(options[:levels], options[:current_level]) || options[:current_level] == 1
               list = content_tag(options[:wrapper_tag], list.html_safe, list_options)
             else
@@ -92,6 +92,11 @@ module Menumatic
           0
         end
 
+        def depth_count(request, options = {})
+          return options[:levels].count unless options[:levels].empty?
+          count_active_descendants(request)
+        end
+
         def paths_match?(request)
           if self.is_link?
             self.active_paths.each do |path|
@@ -107,7 +112,7 @@ module Menumatic
         end
 
         def levels_to_i(levels_in_words)
-          levels_in_words.map{ |word| @@level_options.index(word.to_sym) + 1 }
+          levels_in_words.map{ |word| word.is_a?(Symbol) ? @@level_options.index(word.to_sym) + 1 : word }
         end
       end
     end
