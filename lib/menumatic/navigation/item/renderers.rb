@@ -13,7 +13,7 @@ module Menumatic
           options.delete(:class)
           options = options.merge({})
           options[:current_level] += 1
-
+          
           options[:show] ||= :active
           options[:wrapper_tag] ||= :ul
           options[:item_tag] ||= :li
@@ -93,7 +93,13 @@ module Menumatic
         end
 
         def paths_match?(request)
-          request.fullpath == self.destination || request.url == self.destination if self.is_link?
+          if self.is_link?
+            self.active_paths.each do |path|
+              return true if path.is_a?(Regexp) && (request.fullpath =~ path || request.url =~ path)
+              return true if path.is_a?(String) && (request.fullpath == path || request.url == path)
+            end
+            return request.fullpath == self.destination || request.url == self.destination if self.active_paths.empty?
+          end
         end
 
         def on_valid_level?(levels, current_level)

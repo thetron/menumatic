@@ -12,6 +12,7 @@ module Menumatic
             options = args[2]
             self.active_paths = options[:active_paths]
           end
+          self.active_paths ||= []
         end
       end
     end
