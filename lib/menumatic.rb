@@ -1,7 +1,6 @@
 module Menumatic
   module Helpers
     autoload :NavigationHelper, 'menumatic/helpers/navigation_helper'
-    ActionController::Base.helper(Menumatic::Helpers::NavigationHelper)
   end
 
   module Navigation
@@ -20,4 +19,5 @@ module Menumatic
 end
 
 require 'menumatic/rails/routes'
+require 'menumatic/rails/rendering'
 require 'menumatic/engine'
