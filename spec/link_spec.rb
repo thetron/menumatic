@@ -8,10 +8,7 @@ describe Menumatic::Navigation::Item::Link do
     @destination = "/search"
     @options = {}
     @link = Menumatic::Navigation::Item::Link.new(@label, @destination, @options)
-
-    ActiveResource::HttpMock.respond_to do |mock|
-      mock.get '/search', {}, ''
-    end
+    @request = Factory.build(:request)
   end
 
   it "should have a label" do
@@ -33,12 +30,11 @@ describe Menumatic::Navigation::Item::Link do
   end
 
   it "should be active when destination is the same as the request path" do
-    request = ActiveResource::Request.new(:get, @link.destination)
-    @link.is_active?(request).should == true
+    @link.is_active?(@request).should == true
   end
 
   it "should not be active when destination is not the same as the request path" do
-    @link.is_active?(request).should == false
+    @link.is_active?(@request).should == false
   end
 
   it "should be able to parent links"

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    menumatic (0.0.1)
+    menumatic (0.1.4)
 
 GEM
   remote: http://rubygems.org/
@@ -91,5 +91,5 @@ DEPENDENCIES
   autotest-growl
   factory_girl
   menumatic!
-  rails (~> 3.0.4)
+  rails (= 3.0.5)
   rspec

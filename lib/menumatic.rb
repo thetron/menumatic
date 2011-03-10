@@ -18,6 +18,7 @@ module Menumatic
   #autoload :SitemapController, '../app/controllers/menumatic
 end
 
+require 'rails'
 require 'menumatic/rails/routes'
 require 'menumatic/rails/rendering'
 require 'menumatic/engine'
