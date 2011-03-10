@@ -39,9 +39,8 @@ module Menumatic
           # render link
           link = ""
           link = link_to(self.label, self.destination, self.html_options).html_safe if self.is_link? && !options[:group]
-
           if on_valid_level?(options[:levels], options[:current_level])
-            if options[:current_level] == 1 || (self.is_group? && options[:group] == self.group_id)
+            if (options[:current_level] == 1 && self.is_group?) || (self.is_group? && options[:group] == self.group_id)
               list.html_safe
             elsif options[:show] == :all || self.is_active?(request)
               content_tag(options[:item_tag], link.to_s + list.to_s, html_options.merge_with_join(self.wrapper_options)).to_s.html_safe
@@ -95,7 +94,7 @@ module Menumatic
         end
 
         def depth_count(request, options = {})
-          return options[:levels].count unless options[:levels].empty?
+          return options[:levels].count if options[:levels] && !options[:levels].empty?
           count_active_descendants(request)
         end
 
@@ -110,11 +109,11 @@ module Menumatic
         end
 
         def on_valid_level?(levels, current_level)
-          levels_to_i(levels).include?(current_level-1) || levels.empty?
+          levels.nil? || levels.empty? || levels_to_i(levels).include?(current_level-1)
         end
 
         def levels_to_i(levels_in_words)
-          levels_in_words.map{ |word| word.is_a?(Symbol) ? @@level_options.index(word.to_sym) + 1 : word }
+          levels_in_words.map{ |word| word.is_a?(Symbol) ? @@level_options.index(word.to_sym) + 1 : word } if levels_in_words
         end
       end
     end

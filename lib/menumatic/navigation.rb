@@ -6,6 +6,8 @@ module Menumatic
       attr_accessor :id, :root
 
       class << self
+        include Rails.application.routes.url_helpers if Rails && Rails.application
+
         def navigate_to(label, destination, options = {})
           if block_given?
             item = self.get_instance.root.navigate_to(label, destination, options, &Proc.new)

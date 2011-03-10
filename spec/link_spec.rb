@@ -1,14 +1,12 @@
 require 'spec_helper'
-require 'active_resource/http_mock'
 
 describe Menumatic::Navigation::Item::Link do
 
   before :each do
     @label = "Search"
-    @destination = "/search"
+    @destination = @request.fullpath
     @options = {}
     @link = Menumatic::Navigation::Item::Link.new(@label, @destination, @options)
-    @request = Factory.build(:request)
   end
 
   it "should have a label" do
@@ -34,15 +32,20 @@ describe Menumatic::Navigation::Item::Link do
   end
 
   it "should not be active when destination is not the same as the request path" do
+    @link.destination = "/home"
     @link.is_active?(@request).should == false
   end
 
-  it "should be able to parent links"
-  it "should be able to parent groups"
+  it "should be able to parent links" do
+    @link.navigate_to("Contact us", "/contact_us")
+    @link.items.first.is_link?.should == true
+    @link.items.first.label.should == "Contact us"
+    @link.items.first.destination.should == "/contact_us"
+  end
 
-  it "should render a list item containing only a link when it has no children"
-  it "should render a list item containing only a link when it has no active descendants"
-  it "should render a list item containing an active link when active"
-  it "should render a list item containing a list of its children when active"
-  it "should render a list item containing an active link and a list of its children when it has an active descendant"
+  it "should be able to parent groups" do
+    @link.group(:sidebar)
+    @link.items.first.is_group?.should == true
+    @link.items.first.group_id.should == :sidebar
+  end
 end

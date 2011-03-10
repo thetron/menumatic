@@ -6,5 +6,5 @@ gemspec
 gem 'rspec'
 gem 'autotest'
 gem 'autotest-growl'
-gem 'factory_girl'
+gem 'capybara', :git => 'https://github.com/jnicklas/capybara.git'
 gem 'rails', '3.0.5'
