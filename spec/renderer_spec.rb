@@ -36,13 +36,15 @@ describe Menumatic::Navigation::Item::Renderers do
   end
 
   it "should render a list item containing an active link and a list of its children when it has an active descendant" do
-    @link.fullpath = "/home"
-    @link.url = "http://test.menumatic.com/home"
+    @link.destination = "/home"
 
     @link.navigate_to "Child link 1", "/page/child_1" do |child|
       child.navigate_to "Search", @request.fullpath
     end
     @link.navigate_to "Child link 2", "/page/child_2"
-    1.should == 2
+
+    html = Capybara.string @link.render(@request)
+    html.should have_selector('li > ul.active')
+    html.should have_selector("li > ul.active > li.active > ul.active > li.active > a[href='#{@request.fullpath}']")
   end
 end
