@@ -21,3 +21,4 @@ end
 require 'menumatic/rails/routes'
 require 'menumatic/rails/rendering'
 require 'menumatic/engine'
+require 'menumatic/hash'

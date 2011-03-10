@@ -9,7 +9,7 @@ module Menumatic
         options[:groups] ||= [options[:groups]].delete_if{ |g| g.blank? }
 
         options[:class] ||= ""
-        options[:class] += "navigation #{navigation_id.to_s}"
+        options[:class] = (options[:class].split(" ") + ["navigation #{navigation_id.to_s}"]).join(" ")
 
         navigation = Menumatic::Navigation::Base.load_navigation(navigation_id.to_sym)
         navigation.root.render(request, options)

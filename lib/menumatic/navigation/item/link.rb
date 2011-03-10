@@ -10,7 +10,11 @@ module Menumatic
 
           if args.length > 2
             options = args[2]
-            self.active_paths = options[:active_on]
+
+            if options[:active_on]
+              self.active_paths = options[:active_on]
+              options.delete(:active_on)
+            end
           end
           self.active_paths ||= []
         end
