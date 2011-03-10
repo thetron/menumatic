@@ -85,7 +85,7 @@ helper:
     <!-- snip -->
     <header>
       <nav>
-       <%= navigation :application %>
+       <%= navigation :navigation => 'application' %>
       </nav>
     </header>
 
@@ -103,16 +103,18 @@ easily achiveable:
     <!-- snip -->
     <header>
       <nav>
-       <%= navigation :application, :level => :primary %>
+       <%= render :navigation => 'application', :level => :primary %>
       </nav>
     </header>
 
     <div class="sub_navigation">
-      <%= navigation :application, :levels => [:secondary, :tertiary] %>
+      <%= render :navigation => application, :levels => [:secondary, :tertiary] %>
     </div>
 
 The above example would render the top-level navigation in the
 `<header>` and everything else in the `sub_navigation` div below.
+
+__Note:__ numbers are also acceptable parameters here, where 1 is the primary level.
 
 
 ## Sitemap generation
