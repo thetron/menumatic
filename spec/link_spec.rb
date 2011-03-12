@@ -31,6 +31,11 @@ describe Menumatic::Navigation::Item::Link do
     @link.is_active?(@request).should == true
   end
 
+  it "should be active when destination is the same as the request path and the request path includes a get param" do
+    @request.stub!(:fullpath).and_return("/search?text=a%20search&page=1")
+    @link.is_active?(@request).should == true
+  end
+
   it "should not be active when destination is not the same as the request path" do
     @link.destination = "/home"
     @link.is_active?(@request).should == false
