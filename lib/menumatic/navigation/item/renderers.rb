@@ -101,10 +101,10 @@ module Menumatic
         def paths_match?(request)
           if self.is_link?
             self.active_paths.each do |path|
-              return true if path.is_a?(Regexp) && (request.fullpath =~ path || request.url =~ path)
-              return true if path.is_a?(String) && (request.fullpath == path || request.url == path)
+              return true if path.is_a?(Regexp) && (request.fullpath.split('?').first =~ path || request.url.split('?').first =~ path)
+              return true if path.is_a?(String) && (request.fullpath.split('?').first == path || request.url.split('?').first == path)
             end
-            return request.fullpath == self.destination || request.url == self.destination if self.active_paths.empty?
+            return request.fullpath.split('?').first == self.destination || request.url.split('?').first == self.destination if self.active_paths.empty?
           end
         end
 
