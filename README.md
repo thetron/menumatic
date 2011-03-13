@@ -135,11 +135,8 @@ some feedback!
 
 This is what I have planned for some future releases:
 
-* __Tests__ I know I should've been doing this properly from the start,
-  but i'm still trying to get my head around TDD. However, this is definitely a
-  big priority for Menumatic.
-
-* __More configuration options__
+* Better test coverage
+* More configuration options
 
 
 # Credits
