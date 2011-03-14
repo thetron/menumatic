@@ -5,7 +5,7 @@ module ActionView
     # for :navigation, which will render the selected navigation from the
     # `app/navigation` directory.
     def render_with_navigation_option(options = {}, locals = {}, &block)
-      if options.has_key? :navigation
+      if options.respond_to?(:has_key?) && options.has_key?(:navigation)
         navigation_id = options[:navigation]
         options.delete(:navigation)
         menumatic(navigation_id, options)
