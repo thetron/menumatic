@@ -16,7 +16,7 @@ PATH
   remote: .
   specs:
     menumatic (0.1.5)
-      rails (> 3.0.4)
+      rails (>= 3.0.4)
 
 GEM
   remote: http://rubygems.org/
@@ -121,5 +121,5 @@ DEPENDENCIES
   autotest-growl
   capybara!
   menumatic!
-  rails (> 3.0.4)
+  rails (>= 3.0.4)
   rspec
