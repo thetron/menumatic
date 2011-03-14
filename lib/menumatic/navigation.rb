@@ -42,10 +42,14 @@ module Menumatic
         end
 
         def load_navigation(navigation_id)
-          # Eager load the requested navgation (allows for use of normal if/unless statements)
-          Menumatic::Navigation::Base.destroy_all
-          load "app/navigation/#{navigation_id}_navigation.rb"
-          Menumatic::Navigation::Base.get(navigation_id)
+          if File.exists?("app/navigation/#{navigation_id}_navigation.rb")
+            # Eager load the requested navgation (allows for use of normal if/unless statements)
+            Menumatic::Navigation::Base.destroy_all
+            load "app/navigation/#{navigation_id}_navigation.rb"
+            Menumatic::Navigation::Base.get(navigation_id)
+          else
+            raise Menumatic::NavigationNotFound, "app/navigation/#{navigation_id}_navigation.rb"
+          end
         end
       end
 
