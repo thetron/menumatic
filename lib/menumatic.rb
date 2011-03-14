@@ -13,9 +13,6 @@ module Menumatic
     end
     autoload :Base, 'menumatic/navigation'
   end
-
-  #autoload :Mapper, 'menumatic/action_dispatch/routing/mapper'
-  #autoload :SitemapController, '../app/controllers/menumatic
 end
 
 require 'rails'
@@ -23,3 +20,4 @@ require 'menumatic/rails/routes'
 require 'menumatic/rails/rendering'
 require 'menumatic/engine'
 require 'menumatic/hash'
+require 'menumatic/exceptions'
