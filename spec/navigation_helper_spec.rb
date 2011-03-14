@@ -63,4 +63,14 @@ describe Menumatic::Helpers::NavigationHelper do
     html = Capybara::string(@navigation.render(@request, :item_tag => :span))
     html.should have_selector('ul.level_1 > span > a[href="/home"]')
   end
+
+  it "should accept a custom HTML class" do
+    html = Capybara::string(@navigation.render(@request, :class => "additional_test_class"))
+    html.should have_selector('ul.additional_test_class')
+  end
+
+  it "should accept a custom HTML ID" do
+    html = Capybara::string(@navigation.render(@request, :id => "navigation_test_id"))
+    html.should have_selector('ul#navigation_test_id')
+  end
 end

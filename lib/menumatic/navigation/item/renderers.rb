@@ -20,6 +20,9 @@ module Menumatic
           options[:wrapper_tag] ||= :ul
           options[:item_tag] ||= :li
 
+          # 1.0 roadmap - rendering should be divided into these two methods
+          render_as_link(request, options) || render_as_group(request, options)
+
           # render list
           list = self.items.map { |item| item.render(request, options) }.join("")
           html_options[:class] ||= ""
@@ -115,6 +118,19 @@ module Menumatic
 
         def levels_to_i(levels_in_words)
           levels_in_words.map{ |word| word.is_a?(Symbol) ? @@level_options.index(word.to_sym) + 1 : word } if levels_in_words
+        end
+
+        private
+        def render_as_link(request, options = {})
+          if self.is_link?
+            #... todo
+          end
+        end
+
+        def render_as_group(request, options = {})
+          if self.is_group?
+            #... todo
+          end
         end
       end
     end
