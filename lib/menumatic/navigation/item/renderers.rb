@@ -95,7 +95,8 @@ module Menumatic
 
         def depth_count(request, options = {})
           return options[:levels].count if options[:levels] && !options[:levels].empty?
-          count_active_descendants(request)
+          depth = count_active_descendants(request)
+          (depth > 0) ? depth : 1
         end
 
         def paths_match?(request)
