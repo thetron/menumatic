@@ -85,7 +85,7 @@ helper:
     <!-- snip -->
     <header>
       <nav>
-       <%= navigation :navigation => 'application' %>
+       <%= render :navigation => 'application' %>
       </nav>
     </header>
 
